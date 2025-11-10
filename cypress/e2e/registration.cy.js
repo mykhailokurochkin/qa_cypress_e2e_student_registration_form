@@ -48,9 +48,9 @@ describe('Student Registration page', () => {
 
     cy.get('textarea#currentAddress').type(form.address);
     cy.contains('Select State').click();
-    cy.contains('div', 'NCR').click();
+    cy.contains('div', form.state).click();
     cy.contains('Select City').click();
-    cy.contains('div', 'Delhi').click();
+    cy.contains('div', form.city).click();
     cy.get('button#submit').click();
 
     cy.get('.modal-body').should('contain', form.firstName);
@@ -61,5 +61,6 @@ describe('Student Registration page', () => {
     cy.get('.modal-body').should('contain', form.dateOfBirth);
     cy.get('.modal-body').should('contain', form.hobbies.join(', '));
     cy.get('.modal-body').should('contain', form.address);
+    cy.get('.modal-body').should('contain', form.state + ' ' + form.city);
   });
 });
