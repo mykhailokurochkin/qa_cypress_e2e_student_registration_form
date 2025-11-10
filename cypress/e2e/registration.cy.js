@@ -8,7 +8,7 @@ describe('Student Registration page', () => {
     gender: 'Male',
     mobile: '1234567890',
     dateOfBirth: '10 November,2008',
-    subjects: ['Math', 'English'],
+    subjects: ['Maths', 'English'],
     hobbies: ['Sports', 'Reading', 'Music'],
     address: '123 Main St, Springfield',
     state: 'Uttar Pradesh',
@@ -42,9 +42,9 @@ describe('Student Registration page', () => {
     form.subjects.forEach((subject) => {
       cy.get('input#subjectsInput').type(subject + '{enter}');
     });
-    cy.contains('Sports').click();
-    cy.contains('Reading').click();
-    cy.contains('Music').click();
+    form.hobbies.forEach((hobbie) => {
+      cy.contains(hobbie).click();
+    });
 
     cy.get('textarea#currentAddress').type(form.address);
     cy.contains('Select State').click();
@@ -59,6 +59,7 @@ describe('Student Registration page', () => {
     cy.get('.modal-body').should('contain', form.gender);
     cy.get('.modal-body').should('contain', form.mobile);
     cy.get('.modal-body').should('contain', form.dateOfBirth);
+    cy.get('.modal-body').should('contain', form.subjects.join(', '));
     cy.get('.modal-body').should('contain', form.hobbies.join(', '));
     cy.get('.modal-body').should('contain', form.address);
     cy.get('.modal-body').should('contain', form.state + ' ' + form.city);
